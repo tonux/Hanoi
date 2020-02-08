@@ -29,7 +29,7 @@ public class draw extends JPanel implements ActionListener {
     private int pile;
     private int nm;
     private int numberDisc;
-    private int[] topes;
+    private int[] tours;
     private int discMoved;
     private Image[] disc;
     private static final int LIMIT_DISQUE = 8;
@@ -59,10 +59,10 @@ public class draw extends JPanel implements ActionListener {
 
     private void initializeAnimationComponents() {
         nm = 0;
-        topes = new int[NUMBER_TOUR + 1];
-        topes[1] = numberDisc;
-        topes[2] = 0;
-        topes[3] = 0;
+        tours = new int[NUMBER_TOUR + 1];
+        tours[1] = numberDisc;
+        tours[2] = 0;
+        tours[3] = 0;
         pile = 1;
         moves = new Move[(int) Math.pow(2, numberDisc)];
         moveDisc(numberDisc, 1, 2, 3); // faire le mouvement
@@ -153,7 +153,7 @@ public class draw extends JPanel implements ActionListener {
                 }
                 break;
             case 4:
-                int niveau = topes[moves[discMoved].getDestination()] + 1;
+                int niveau = tours[moves[discMoved].getDestination()] + 1;
                 if (y < PileYPosition(niveau)) {
                     y++;
                     positions[pile].setY(y);
@@ -164,8 +164,8 @@ public class draw extends JPanel implements ActionListener {
         }
         if (moveDone) {
             pas = 1;
-            topes[moves[discMoved].getDestination()]++;
-            topes[moves[discMoved].getOrigin()]--;
+            tours[moves[discMoved].getDestination()]++;
+            tours[moves[discMoved].getOrigin()]--;
             discMoved++;
             if (discMoved == (int) Math.pow(2, numberDisc)) {
                 timer.stop();
